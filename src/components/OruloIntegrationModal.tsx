@@ -67,7 +67,7 @@ export const OruloIntegrationModal: React.FC<OruloModalProps> = ({
     setConnectionStatus({ tested: true, loading: true });
     try {
       const res = await fetch('/api/orulo/status');
-      const data = await res.json();
+      const data: any = await res.json();
       if (res.ok && data.success) {
         setConnectionStatus({
           tested: true,
@@ -98,7 +98,7 @@ export const OruloIntegrationModal: React.FC<OruloModalProps> = ({
     setSyncStatus({ loading: true });
     try {
       const res = await fetch('/api/orulo/sync', { method: 'POST' });
-      const data = await res.json();
+      const data: any = await res.json();
       if (res.ok && data.success) {
         setSyncStatus({
           loading: false,
@@ -129,7 +129,7 @@ export const OruloIntegrationModal: React.FC<OruloModalProps> = ({
     setIsSearching(true);
     try {
       const res = await fetch(`/api/orulo/buildings?name=${encodeURIComponent(searchQuery)}&results_per_page=10`);
-      const data = await res.json();
+      const data: any = await res.json();
       setSearchResults(data.buildings || []);
     } catch (err) {
       console.error(err);

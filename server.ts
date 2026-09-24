@@ -41,7 +41,7 @@ async function getOruloToken(): Promise<string> {
     throw new Error(`Orulo OAuth failed (${res.status}): ${errorText}`);
   }
 
-  const data = await res.json();
+  const data: any = await res.json();
   cachedToken = {
     token: data.access_token,
     expiresAt: Date.now() + (data.expires_in || 7200) * 1000,
@@ -93,10 +93,10 @@ app.get('/api/orulo/buildings/:id', async (req, res) => {
       return res.status(bRes.status).json({ error: 'Empreendimento não encontrado na Órulo' });
     }
 
-    const building = await bRes.json();
-    const imagesData = imgRes.ok ? await imgRes.json() : { images: [] };
-    const fpData = fpRes.ok ? await fpRes.json() : { floor_plans: [] };
-    const typData = typRes.ok ? await typRes.json() : { typologies: [] };
+    const building: any = await bRes.json();
+    const imagesData: any = imgRes.ok ? await imgRes.json() : { images: [] };
+    const fpData: any = fpRes.ok ? await fpRes.json() : { floor_plans: [] };
+    const typData: any = typRes.ok ? await typRes.json() : { typologies: [] };
 
     res.json({
       ...building,
@@ -171,10 +171,10 @@ app.post('/api/orulo/sync', async (_req, res) => {
         ]);
 
         if (bRes.ok) {
-          const b = await bRes.json();
-          const imgs = imgRes.ok ? await imgRes.json() : { images: [] };
-          const fps = fpRes.ok ? await fpRes.json() : { floor_plans: [] };
-          const typs = typRes.ok ? await typRes.json() : { typologies: [] };
+          const b: any = await bRes.json();
+          const imgs: any = imgRes.ok ? await imgRes.json() : { images: [] };
+          const fps: any = fpRes.ok ? await fpRes.json() : { floor_plans: [] };
+          const typs: any = typRes.ok ? await typRes.json() : { typologies: [] };
 
           currentData[id] = {
             ...currentData[id],
