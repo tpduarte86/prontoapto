@@ -1,6 +1,8 @@
 // Centralized WhatsApp link builder for ProntoApto
-// Replace with the agency/specialist dedicated WhatsApp number
-export const DEFAULT_WHATSAPP_PHONE = '5511998765432';
+// Specialized ProntoApto consultant dedicated WhatsApp number
+export const DEFAULT_WHATSAPP_PHONE = '5511959972156';
+export const DISPLAY_WHATSAPP_PHONE = '(11) 95997-2156';
+export const FULL_WHATSAPP_PHONE = '+55 (11) 95997-2156';
 
 export function getGeneralWhatsAppLink(phone = DEFAULT_WHATSAPP_PHONE): string {
   const message = `Olá! Estava navegando no ProntoApto e gostaria de ajuda para encontrar um apartamento na Zona Sul de São Paulo que se encaixe no meu perfil e orçamento.`;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ShieldCheck, MessageCircle, MapPin, Building2, CheckCircle2 } from 'lucide-react';
-import { getGeneralWhatsAppLink } from '../utils/whatsapp';
+import { getGeneralWhatsAppLink, DISPLAY_WHATSAPP_PHONE } from '../utils/whatsapp';
 import { trackEvent } from '../utils/analytics';
 
 interface FooterProps {
@@ -54,7 +54,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenOruloModal }) 
                 className="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg transition-colors"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>Tirar dúvidas pelo WhatsApp</span>
+                <span>WhatsApp: {DISPLAY_WHATSAPP_PHONE}</span>
               </a>
             </div>
           </div>

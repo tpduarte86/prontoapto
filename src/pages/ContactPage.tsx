@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { updateDocumentSEO } from '../utils/seo';
 import { trackEvent } from '../utils/analytics';
-import { getGeneralWhatsAppLink } from '../utils/whatsapp';
+import { getGeneralWhatsAppLink, FULL_WHATSAPP_PHONE } from '../utils/whatsapp';
 import { MessageCircle, Mail, MapPin, Clock, ShieldCheck, CheckCircle2, ArrowRight } from 'lucide-react';
 
 interface ContactPageProps {
@@ -170,15 +170,16 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenLeadModal }) => 
                 <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                 <div>
                   <strong className="text-white block font-semibold">WhatsApp Oficial:</strong>
-                  <span>Atendimento rápido de segunda a sábado das 9h às 19h</span>
-                  <div className="pt-1.5">
+                  <span className="text-emerald-300 font-mono text-xs block font-bold mt-0.5">{FULL_WHATSAPP_PHONE}</span>
+                  <span className="text-neutral-400 block mt-0.5">Atendimento ágil de segunda a sábado das 9h às 19h</span>
+                  <div className="pt-2">
                     <a
                       href={getGeneralWhatsAppLink()}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-emerald-400 font-semibold hover:underline inline-flex items-center gap-1"
                     >
-                      Abrir conversa no WhatsApp →
+                      Iniciar conversa no WhatsApp →
                     </a>
                   </div>
                 </div>
