@@ -2,20 +2,17 @@ import React, { useState } from 'react';
 import { MessageCircle, Menu, X, ArrowRight } from 'lucide-react';
 import { getGeneralWhatsAppLink } from '../utils/whatsapp';
 import { trackEvent } from '../utils/analytics';
-import { PROPERTIES } from '../data/properties';
 
 interface HeaderProps {
   currentPath: string;
   onNavigate: (path: string) => void;
   onOpenLeadModal: (source?: string) => void;
-  onOpenOruloModal?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   currentPath,
   onNavigate,
   onOpenLeadModal,
-  onOpenOruloModal,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -77,20 +74,6 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Zone 3: 1-2 primary actions */}
         <div className="hidden sm:flex items-center gap-3">
-          {onOpenOruloModal && (
-            <button
-              onClick={onOpenOruloModal}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-[11px] font-semibold text-neutral-700 bg-neutral-100 hover:bg-neutral-200/80 rounded-lg transition-colors border border-neutral-200 cursor-pointer"
-              title="Integração Órulo API v2 ativa"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span>Órulo Conectada</span>
-            </button>
-          )}
-
           <a
             href={getGeneralWhatsAppLink()}
             target="_blank"
@@ -159,22 +142,6 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           <div className="pt-3 border-t border-neutral-100 flex flex-col gap-2">
-            {onOpenOruloModal && (
-              <button
-                onClick={() => {
-                  onOpenOruloModal();
-                  setMobileMenuOpen(false);
-                }}
-                className="w-full flex items-center justify-between p-2.5 bg-neutral-100 rounded-lg text-xs font-semibold text-neutral-800"
-              >
-                <span className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
-                  <span>Integração Órulo API v2 (Ativa)</span>
-                </span>
-                <span className="text-[10px] text-emerald-700 font-mono">{PROPERTIES.length} sincronizados</span>
-              </button>
-            )}
-
             <button
               onClick={() => {
                 setMobileMenuOpen(false);

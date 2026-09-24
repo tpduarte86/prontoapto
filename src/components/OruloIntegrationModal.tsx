@@ -16,9 +16,16 @@ import {
   AlertCircle,
   Database,
   Layers,
+  Inbox,
+  Download,
+  MessageCircle,
+  Mail,
+  User,
+  Calendar,
 } from 'lucide-react';
 import { Property } from '../types/property';
 import { PROPERTIES } from '../data/properties';
+import { getLocalLeads, exportLeadsToCsv, LeadPayload } from '../services/leadService';
 
 interface OruloModalProps {
   isOpen: boolean;
@@ -31,6 +38,8 @@ export const OruloIntegrationModal: React.FC<OruloModalProps> = ({
   onClose,
   onSelectProperty,
 }) => {
+  const [activeTab, setActiveTab] = useState<'leads' | 'orulo'>('leads');
+  const [localLeads, setLocalLeads] = useState<LeadPayload[]>([]);
   const [showSecret, setShowSecret] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState<{
     tested: boolean;
@@ -58,8 +67,11 @@ export const OruloIntegrationModal: React.FC<OruloModalProps> = ({
   const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
-    if (isOpen && !connectionStatus.tested) {
-      testConnection();
+    if (isOpen) {
+      setLocalLeads(getLocalLeads());
+      if (!connectionStatus.tested) {
+        testConnection();
+      }
     }
   }, [isOpen]);
 
@@ -157,13 +169,13 @@ export const OruloIntegrationModal: React.FC<OruloModalProps> = ({
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-display text-lg font-bold">Integração Oficial Órulo API v2</h3>
+                <h3 className="font-display text-lg font-bold">Painel de Gestão & Integrações</h3>
                 <span className="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 text-[10px] font-mono rounded font-semibold border border-emerald-500/30">
-                  Ao Vivo
+                  ProntoApto Admin
                 </span>
               </div>
               <p className="text-xs text-neutral-400">
-                Sincronização em tempo real de fotos oficiais, plantas humanizadas e dados de incorporadoras
+                Gerencie solicitações de contato recebidas e status da API Órulo em tempo real
               </p>
             </div>
           </div>
@@ -177,8 +189,170 @@ export const OruloIntegrationModal: React.FC<OruloModalProps> = ({
           </button>
         </div>
 
+        {/* Tab Navigation */}
+        <div className="flex items-center px-6 bg-neutral-900 border-b border-neutral-800 text-xs">
+          <button
+            onClick={() => setActiveTab('leads')}
+            className={`py-3 px-4 font-semibold border-b-2 flex items-center gap-2 cursor-pointer transition-colors ${
+              activeTab === 'leads'
+                ? 'border-emerald-500 text-emerald-400'
+                : 'border-transparent text-neutral-400 hover:text-neutral-200'
+            }`}
+          >
+            <Inbox className="w-4 h-4" />
+            <span>Leads & Contatos Recebidos</span>
+            <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-emerald-500/20 text-emerald-300 font-mono font-bold">
+              {localLeads.length}
+            </span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('orulo')}
+            className={`py-3 px-4 font-semibold border-b-2 flex items-center gap-2 cursor-pointer transition-colors ${
+              activeTab === 'orulo'
+                ? 'border-emerald-500 text-emerald-400'
+                : 'border-transparent text-neutral-400 hover:text-neutral-200'
+            }`}
+          >
+            <Database className="w-4 h-4" />
+            <span>Integração Órulo API v2</span>
+          </button>
+        </div>
+
         {/* Modal Body Scrollable */}
         <div className="p-6 overflow-y-auto space-y-6 flex-1 text-xs">
+          
+          {activeTab === 'leads' ? (
+            /* LEADS MANAGEMENT VIEW */
+            <div className="space-y-6">
+              {/* Email Route Status Banner */}
+              <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-emerald-950">
+                <div className="flex items-start sm:items-center gap-2.5">
+                  <div className="p-2 bg-emerald-100 text-emerald-700 rounded-lg shrink-0">
+                    <Mail className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <strong className="block text-xs font-bold text-emerald-900">
+                      Destino de Todas as Solicitações de Contato:
+                    </strong>
+                    <span className="text-xs text-emerald-800 font-mono font-semibold">
+                      tpduarte86@gmail.com
+                    </span>
+                    <span className="text-[11px] text-emerald-700 block mt-0.5">
+                      Encaminhamento ativo via FormSubmit & Cloudflare Edge Worker
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setLocalLeads(getLocalLeads())}
+                    className="px-3 py-1.5 bg-white hover:bg-neutral-100 text-neutral-700 border border-neutral-300 rounded-lg font-medium transition-colors inline-flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                  >
+                    <RefreshCw className="w-3.5 h-3.5" />
+                    <span>Atualizar</span>
+                  </button>
+
+                  <button
+                    onClick={exportLeadsToCsv}
+                    disabled={localLeads.length === 0}
+                    className="px-3.5 py-1.5 bg-neutral-900 hover:bg-neutral-800 disabled:opacity-50 text-white rounded-lg font-semibold transition-colors inline-flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                  >
+                    <Download className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Exportar Planilha (CSV)</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Leads List */}
+              {localLeads.length === 0 ? (
+                <div className="py-12 text-center bg-neutral-50 rounded-xl border border-dashed border-neutral-300 space-y-3">
+                  <div className="w-12 h-12 rounded-full bg-neutral-200/80 text-neutral-400 flex items-center justify-center mx-auto">
+                    <Inbox className="w-6 h-6" />
+                  </div>
+                  <h4 className="font-display text-base font-bold text-neutral-800">
+                    Nenhum lead registrado no momento
+                  </h4>
+                  <p className="text-xs text-neutral-500 max-w-md mx-auto">
+                    Quando um visitante solicitar contato pelo site ou formulário de interesse, a notificação chegará imediatamente em <strong className="text-neutral-700">tpduarte86@gmail.com</strong> e ficará registrada aqui.
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-neutral-700 uppercase tracking-wider text-[11px]">
+                      {localLeads.length} {localLeads.length === 1 ? 'Lead Capturado' : 'Leads Capturados'}
+                    </span>
+                    <span className="text-[11px] text-neutral-500">
+                      Clique em "Abrir no WhatsApp" para iniciar a conversa com mensagem personalizada
+                    </span>
+                  </div>
+
+                  <div className="divide-y divide-neutral-200 border border-neutral-200 rounded-xl bg-white overflow-hidden shadow-2xs">
+                    {localLeads.map((lead) => {
+                      const cleanPhone = (lead.whatsapp || '').replace(/\D/g, '');
+                      const waLink = `https://wa.me/55${cleanPhone}?text=${encodeURIComponent(`Olá ${lead.name}! Sou consultor especialista da ProntoApto. Recebi sua solicitação de interesse sobre ${lead.propertyName || 'apartamentos na Zona Sul'}. Como posso te ajudar hoje?`)}`;
+
+                      return (
+                        <div key={lead.id || Math.random()} className="p-4 hover:bg-neutral-50/80 transition-colors space-y-2">
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <div className="flex items-center gap-2">
+                              <span className="font-bold text-sm text-neutral-950">{lead.name}</span>
+                              <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-medium">
+                                {lead.source || 'Formulário Site'}
+                              </span>
+                            </div>
+
+                            <div className="flex items-center gap-3">
+                              <span className="text-[11px] text-neutral-400">
+                                {lead.createdAt ? new Date(lead.createdAt).toLocaleString('pt-BR') : 'Hoje'}
+                              </span>
+                              <a
+                                href={waLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-[11px] rounded-lg inline-flex items-center gap-1.5 transition-colors shadow-2xs"
+                              >
+                                <MessageCircle className="w-3.5 h-3.5" />
+                                <span>Abrir no WhatsApp</span>
+                              </a>
+                            </div>
+                          </div>
+
+                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] text-neutral-600 pt-1">
+                            <div>
+                              <span className="text-neutral-400 block text-[10px]">WhatsApp:</span>
+                              <strong className="text-neutral-900 font-mono">{lead.whatsapp}</strong>
+                            </div>
+                            <div>
+                              <span className="text-neutral-400 block text-[10px]">Interesse:</span>
+                              <strong className="text-neutral-900">{lead.propertyName || 'Geral'}</strong> ({lead.neighborhood || 'Zona Sul'})
+                            </div>
+                            <div>
+                              <span className="text-neutral-400 block text-[10px]">Renda / Entrada:</span>
+                              <span className="text-neutral-800">{lead.income || 'Renda n/d'} · {lead.downPayment || 'Entrada n/d'}</span>
+                            </div>
+                            <div>
+                              <span className="text-neutral-400 block text-[10px]">FGTS / Status:</span>
+                              <span className="text-emerald-700 font-semibold">{lead.hasFgts ? 'Possui FGTS' : 'Sem FGTS'}</span>
+                            </div>
+                          </div>
+
+                          {lead.message && (
+                            <div className="bg-neutral-50 p-2.5 rounded-lg border border-neutral-200/80 text-[11px] text-neutral-700 mt-2">
+                              <strong className="text-neutral-900">Mensagem:</strong> "{lead.message}"
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            /* ORULO INTEGRATION VIEW */
+            <>
           
           {/* 1. Credentials & Status Card */}
           <div className="bg-neutral-50 rounded-xl p-5 border border-neutral-200 space-y-4">
@@ -386,6 +560,8 @@ export const OruloIntegrationModal: React.FC<OruloModalProps> = ({
               </div>
             )}
           </div>
+          </>
+          )}
 
         </div>
 

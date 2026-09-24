@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { updateDocumentSEO } from '../utils/seo';
 import { trackEvent } from '../utils/analytics';
 import { getGeneralWhatsAppLink, FULL_WHATSAPP_PHONE } from '../utils/whatsapp';
-import { MessageCircle, Mail, MapPin, Clock, ShieldCheck, CheckCircle2, ArrowRight } from 'lucide-react';
+import { submitLead } from '../services/leadService';
+import { MessageCircle, Mail, MapPin, Clock, ShieldCheck, CheckCircle2, ArrowRight, Loader2 } from 'lucide-react';
 
 interface ContactPageProps {
   onOpenLeadModal: (source: string) => void;
@@ -13,6 +14,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenLeadModal }) => 
   const [whatsapp, setWhatsapp] = useState('');
   const [neighborhood, setNeighborhood] = useState('Zona Sul');
   const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
 
   useEffect(() => {
@@ -24,18 +26,26 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenLeadModal }) => 
     trackEvent('page_view', { page: 'contact' });
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !whatsapp.trim()) return;
 
-    trackEvent('lead_submitted', {
-      source: 'Contact Page',
-      name,
-      whatsapp,
-      neighborhood,
-      message,
-    });
-    setSent(true);
+    setIsSubmitting(true);
+    try {
+      await submitLead({
+        name,
+        whatsapp,
+        neighborhood,
+        message,
+        source: 'Página de Contato (/contato)',
+      });
+      setSent(true);
+    } catch (err) {
+      console.error(err);
+      setSent(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -67,18 +77,18 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenLeadModal }) => 
               <h3 className="font-display text-2xl font-bold text-neutral-900">
                 Mensagem enviada com sucesso!
               </h3>
-              <p className="text-xs text-neutral-600 max-w-sm mx-auto">
-                Obrigado {name}, um dos nossos especialistas em imóveis na Zona Sul entrará em contato em breve via WhatsApp.
+              <p className="text-xs text-neutral-600 max-w-md mx-auto leading-relaxed">
+                Obrigado, <strong className="text-neutral-900">{name}</strong>! Seus dados foram encaminhados diretamente para o consultor responsável (<span className="text-neutral-800 font-medium">tpduarte86@gmail.com</span>) e entraremos em contato rapidamente pelo WhatsApp informado.
               </p>
-              <div className="pt-2">
+              <div className="pt-3">
                 <a
                   href={getGeneralWhatsAppLink()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 py-3 px-6 bg-emerald-600 text-white font-bold text-xs rounded-xl"
+                  className="inline-flex items-center gap-2 py-3.5 px-6 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl shadow-md transition-colors"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>Iniciar conversa agora no WhatsApp</span>
+                  <span>Agilizar atendimento via WhatsApp agora</span>
                 </a>
               </div>
             </div>
@@ -148,10 +158,20 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onOpenLeadModal }) => 
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-3 px-6 bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer"
+                  disabled={isSubmitting}
+                  className="w-full py-3.5 px-6 bg-neutral-900 hover:bg-neutral-800 disabled:opacity-70 text-white font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                 >
-                  <span>Enviar solicitação de atendimento</span>
-                  <ArrowRight className="w-4 h-4 text-neutral-300" />
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-emerald-400" />
+                      <span>Enviando solicitação...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Enviar solicitação de atendimento</span>
+                      <ArrowRight className="w-4 h-4 text-neutral-300" />
+                    </>
+                  )}
                 </button>
               </div>
             </form>

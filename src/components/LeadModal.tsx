@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { X, CheckCircle2, MessageCircle, ShieldCheck, ArrowRight } from 'lucide-react';
+import { X, CheckCircle2, MessageCircle, ShieldCheck, ArrowRight, Loader2 } from 'lucide-react';
 import { trackEvent } from '../utils/analytics';
 import { getPropertyWhatsAppLink, getGeneralWhatsAppLink } from '../utils/whatsapp';
+import { submitLead } from '../services/leadService';
 
 interface LeadModalProps {
   isOpen: boolean;
@@ -24,6 +25,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
   const [income, setIncome] = useState('');
   const [downPayment, setDownPayment] = useState('');
   const [hasFgts, setHasFgts] = useState<string>('sim');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<{ name?: string; whatsapp?: string }>({});
 
@@ -64,7 +66,8 @@ export const LeadModal: React.FC<LeadModalProps> = ({
     finishSubmission();
   };
 
-  const finishSubmission = () => {
+  const finishSubmission = async () => {
+    setIsSubmitting(true);
     // Record lead payload
     const leadPayload = {
       id: `lead_${Date.now()}`,
@@ -73,23 +76,20 @@ export const LeadModal: React.FC<LeadModalProps> = ({
       whatsapp,
       income,
       downPayment,
-      hasFgts,
-      propertyName: propertyName || 'Geral',
+      hasFgts: hasFgts === 'sim',
+      propertyName: propertyName || 'Interesse Geral',
       neighborhood: neighborhood || 'Zona Sul',
       source,
     };
 
-    // Save in localStorage for demonstration/persistence
     try {
-      const stored = JSON.parse(localStorage.getItem('prontoapto_leads') || '[]');
-      stored.push(leadPayload);
-      localStorage.setItem('prontoapto_leads', JSON.stringify(stored));
-    } catch {
-      // quiet fallback
+      await submitLead(leadPayload);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSubmitting(false);
+      setSubmitted(true);
     }
-
-    trackEvent('lead_submitted', leadPayload);
-    setSubmitted(true);
   };
 
   const formatPhoneInput = (val: string) => {
@@ -130,15 +130,18 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                 Recebemos sua solicitação!
               </h3>
               <p className="text-neutral-600 text-sm max-w-sm mx-auto">
-                Olá {name.split(' ')[0]}, nosso especialista em imóveis na Zona Sul irá conferir as disponibilidades e entrar em contato com você.
+                Olá <strong className="text-neutral-900">{name.split(' ')[0]}</strong>, notificamos nossa equipe especializada (<span className="text-neutral-800 font-medium">tpduarte86@gmail.com</span>) e entraremos em contato com você pelo WhatsApp em instantes.
               </p>
             </div>
 
-            <div className="p-4 bg-neutral-50 rounded-xl border border-neutral-100 text-xs text-neutral-500 space-y-1">
-              <span className="font-semibold text-neutral-700 block">
-                Quer atendimento imediato?
+            <div className="p-4 bg-emerald-50/70 border border-emerald-100 rounded-xl text-xs text-emerald-950 space-y-1 text-left">
+              <span className="font-bold flex items-center gap-1.5 text-emerald-800">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                <span>Solicitação Registrada</span>
               </span>
-              <span>Você pode iniciar a conversa diretamente no WhatsApp agora mesmo:</span>
+              <p className="text-neutral-600 text-[11px] leading-relaxed">
+                Quer adiantar sua análise de crédito ou tirar dúvidas agora mesmo sem esperar? Chame direto no WhatsApp:
+              </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
@@ -147,7 +150,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackEvent('whatsapp_click', { placement: 'lead_modal_success' })}
-                className="flex-1 py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm rounded-xl transition-colors inline-flex items-center justify-center gap-2"
+                className="flex-1 py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm rounded-xl transition-colors inline-flex items-center justify-center gap-2 shadow-sm"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>Conversar no WhatsApp</span>
@@ -216,7 +219,8 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                   <div className="pt-2 flex flex-col gap-2">
                     <button
                       type="submit"
-                      className="w-full py-3 px-4 bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs active:scale-[0.99]"
+                      disabled={isSubmitting}
+                      className="w-full py-3 px-4 bg-neutral-900 hover:bg-neutral-800 disabled:opacity-75 text-white font-bold text-sm rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs active:scale-[0.99]"
                     >
                       <span>Avançar para simulação</span>
                       <ArrowRight className="w-4 h-4 text-neutral-300" />
@@ -224,14 +228,22 @@ export const LeadModal: React.FC<LeadModalProps> = ({
 
                     <button
                       type="button"
+                      disabled={isSubmitting}
                       onClick={() => {
                         if (validateStep1()) {
                           finishSubmission();
                         }
                       }}
-                      className="text-xs text-neutral-500 hover:text-neutral-800 py-1 transition-colors cursor-pointer"
+                      className="text-xs text-neutral-500 hover:text-neutral-800 py-1 transition-colors cursor-pointer flex items-center justify-center gap-1.5"
                     >
-                      Prefiro apenas receber contato sem simular agora
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-3.5 h-3.5 animate-spin text-emerald-600" />
+                          <span>Enviando dados...</span>
+                        </>
+                      ) : (
+                        <span>Prefiro apenas receber contato sem simular agora</span>
+                      )}
                     </button>
                   </div>
                 </>
@@ -293,6 +305,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                   <div className="pt-2 flex items-center gap-3">
                     <button
                       type="button"
+                      disabled={isSubmitting}
                       onClick={() => setStep(1)}
                       className="py-3 px-4 text-xs font-semibold text-neutral-600 hover:text-neutral-900 bg-neutral-100 rounded-xl transition-colors cursor-pointer"
                     >
@@ -301,9 +314,17 @@ export const LeadModal: React.FC<LeadModalProps> = ({
 
                     <button
                       type="submit"
-                      className="flex-1 py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl transition-all cursor-pointer shadow-xs active:scale-[0.99]"
+                      disabled={isSubmitting}
+                      className="flex-1 py-3 px-4 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-75 text-white font-bold text-sm rounded-xl transition-all cursor-pointer shadow-xs active:scale-[0.99] flex items-center justify-center gap-2"
                     >
-                      Receber análise preliminar
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin text-white" />
+                          <span>Enviando dados...</span>
+                        </>
+                      ) : (
+                        <span>Receber análise preliminar</span>
+                      )}
                     </button>
                   </div>
                 </>

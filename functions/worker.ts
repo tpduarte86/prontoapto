@@ -36,6 +36,56 @@ export default {
       );
     }
 
+    // Lead capture & email dispatcher endpoint
+    if (url.pathname === '/api/leads' && request.method === 'POST') {
+      try {
+        const body: any = await request.json();
+        const cleanPhone = (body.whatsapp || '').replace(/\D/g, '');
+        const waUrl = `https://wa.me/55${cleanPhone}`;
+
+        // Forward email to tpduarte86@gmail.com
+        await fetch('https://formsubmit.co/ajax/tpduarte86@gmail.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Origin': 'https://prontoapto.com.br',
+            'Referer': 'https://prontoapto.com.br/',
+          },
+          body: JSON.stringify({
+            'Nome': body.name,
+            'WhatsApp': body.whatsapp,
+            'Link Direto WhatsApp': waUrl,
+            'Empreendimento': body.propertyName || 'Interesse Geral',
+            'Bairro': body.neighborhood || 'Zona Sul',
+            'Renda Familiar': body.income ? `R$ ${body.income}` : 'Não informada',
+            'Entrada': body.downPayment ? `R$ ${body.downPayment}` : 'Não informada',
+            'FGTS': body.hasFgts ? 'Sim' : 'Não',
+            'Mensagem': body.message || 'Sem mensagem adicional',
+            'Origem': body.source || 'Portal ProntoApto',
+            'Data/Hora': new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
+            _subject: `🔔 Novo Lead ProntoApto: ${body.name} - ${body.propertyName || body.neighborhood || 'Zona Sul'}`,
+            _template: 'table',
+            _captcha: 'false',
+          }),
+        }).catch(() => null);
+
+        return new Response(
+          JSON.stringify({
+            success: true,
+            message: 'Lead registrado e enviado para o email com sucesso!',
+            leadId: body.id,
+          }),
+          { headers: { 'Content-Type': 'application/json' } }
+        );
+      } catch (err: any) {
+        return new Response(JSON.stringify({ success: false, error: err.message }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+    }
+
     // Static assets fallback with SPA routing
     if (env.ASSETS && typeof env.ASSETS.fetch === 'function') {
       return env.ASSETS.fetch(request);

@@ -215,6 +215,51 @@ app.post('/api/orulo/sync', async (_req, res) => {
   }
 });
 
+// 5. Lead Capture & Notification Endpoint
+app.post('/api/leads', async (req, res) => {
+  try {
+    const body = req.body || {};
+    const cleanPhone = (body.whatsapp || '').replace(/\D/g, '');
+    const waUrl = `https://wa.me/55${cleanPhone}`;
+
+    // Forward to FormSubmit for tpduarte86@gmail.com
+    await fetch('https://formsubmit.co/ajax/tpduarte86@gmail.com', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Origin': 'https://prontoapto.com.br',
+        'Referer': 'https://prontoapto.com.br/',
+      },
+      body: JSON.stringify({
+        'Nome': body.name,
+        'WhatsApp': body.whatsapp,
+        'Link Direto WhatsApp': waUrl,
+        'Email': body.email || 'Não informado',
+        'Empreendimento': body.propertyName || 'Interesse Geral',
+        'Bairro': body.neighborhood || 'Zona Sul',
+        'Renda Familiar': body.income ? `R$ ${body.income}` : 'Não informada',
+        'Entrada': body.downPayment ? `R$ ${body.downPayment}` : 'Não informada',
+        'FGTS': body.hasFgts ? 'Sim' : 'Não',
+        'Mensagem': body.message || 'Sem mensagem adicional',
+        'Origem': body.source || 'Portal ProntoApto',
+        'Data/Hora': new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
+        _subject: `🔔 Novo Lead ProntoApto: ${body.name} - ${body.propertyName || body.neighborhood || 'Zona Sul'}`,
+        _template: 'table',
+        _captcha: 'false',
+      }),
+    }).catch(() => null);
+
+    res.json({
+      success: true,
+      message: 'Lead recebido e notificado com sucesso!',
+      id: body.id,
+    });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 // Mounting Vite in Dev / Serving Static in Prod
 async function startServer() {
   if (process.env.NODE_ENV !== 'production') {
