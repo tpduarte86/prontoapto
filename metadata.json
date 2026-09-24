@@ -1,0 +1,6 @@
+{
+  "name": "ProntoApto - Apartamentos e MCMV na Zona Sul de SP",
+  "description": "Encontre seu apartamento novo ou na planta na Zona Sul de SP com foco no Minha Casa Minha Vida. Compare opções, simule financiamento e consulte disponibilidades reais.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
