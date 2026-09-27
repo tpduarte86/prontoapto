@@ -5,10 +5,9 @@ import { trackEvent } from '../utils/analytics';
 
 interface FooterProps {
   onNavigate: (path: string) => void;
-  onOpenOruloModal?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenOruloModal }) => {
+export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const handleLink = (path: string, label: string) => {
     trackEvent('cta_click', { cta_label: `Footer: ${label}`, target_path: path });
     onNavigate(path);
@@ -25,7 +24,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenOruloModal }) 
           {/* Column 1 & 2: Brand & Mission */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-2">
-              <span className="font-display text-2xl font-bold tracking-tight text-white">
+              <span className="font-logo text-2xl font-bold tracking-tight text-white">
                 ProntoApto<span className="text-emerald-500">.</span>
               </span>
             </div>
@@ -224,19 +223,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenOruloModal }) 
             <button onClick={() => handleLink('/contato', 'Contato')} className="hover:text-white transition-colors">
               Contato
             </button>
-            {onOpenOruloModal && (
-              <>
-                <span aria-hidden="true">·</span>
-                <button
-                  onClick={onOpenOruloModal}
-                  className="text-emerald-400 hover:text-emerald-300 font-mono transition-colors flex items-center gap-1 cursor-pointer"
-                  title="Ver status e sincronização da API Órulo"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse" />
-                  <span>Órulo API v2</span>
-                </button>
-              </>
-            )}
           </div>
         </div>
 

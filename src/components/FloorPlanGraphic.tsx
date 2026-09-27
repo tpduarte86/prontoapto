@@ -42,7 +42,7 @@ export const FloorPlanGraphic: React.FC<FloorPlanGraphicProps> = ({
           <div>
             <div className="flex items-center gap-1.5 text-[10px] font-mono tracking-wider uppercase text-emerald-700 font-semibold mb-0.5">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Planta Oficial Órulo / Incorporadora</span>
+              <span>Planta Humanizada Oficial</span>
             </div>
             <h4 className="text-sm font-bold text-slate-900 font-display">{name}</h4>
           </div>
@@ -88,7 +88,7 @@ export const FloorPlanGraphic: React.FC<FloorPlanGraphicProps> = ({
             <span>Dimensões e cotas oficiais sujeitas a compatibilização executiva</span>
           </div>
           <div className="font-mono text-slate-400">
-            Fonte: Órulo API v2
+            Fonte: Incorporadora e Construtora
           </div>
         </div>
       </div>

@@ -459,7 +459,7 @@ export const PropertyDetailPage: React.FC<PropertyDetailPageProps> = ({
         </div>
       </section>
 
-      {/* 4.5. Tabela Oficial de Tipologias e Disponibilidade (Órulo) */}
+      {/* 4.5. Tabela Oficial de Tipologias e Disponibilidade */}
       {property.typologies && property.typologies.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <TypologiesTable

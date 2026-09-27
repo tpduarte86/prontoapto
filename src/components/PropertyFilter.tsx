@@ -190,7 +190,7 @@ export const PropertyFilter: React.FC<PropertyFilterProps> = ({
             <label className="text-xs font-semibold text-neutral-700">
               Tipologia disponível
             </label>
-            <span className="text-[10px] text-emerald-700 font-mono font-medium">Tabela Órulo</span>
+            <span className="text-[10px] text-emerald-700 font-mono font-medium">Tabela Oficial</span>
           </div>
           <div className="inline-flex w-full p-1 bg-neutral-100 rounded-lg">
             {[

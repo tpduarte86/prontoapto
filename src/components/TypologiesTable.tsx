@@ -87,7 +87,7 @@ export const TypologiesTable: React.FC<TypologiesTableProps> = ({
             Tipologias disponíveis no {property.name}
           </h3>
           <p className="text-xs text-neutral-600 mt-1">
-            Valores &apos;a partir de&apos;, áreas privativas e disponibilidade fornecidos oficialmente pela incorporadora ({property.developer}) via base Órulo.
+            Valores &apos;a partir de&apos;, áreas privativas e disponibilidade fornecidos oficialmente pela incorporadora ({property.developer}).
           </p>
         </div>
 
@@ -339,7 +339,7 @@ export const TypologiesTable: React.FC<TypologiesTableProps> = ({
       <div className="flex items-start gap-2.5 p-3.5 bg-neutral-50 rounded-xl border border-neutral-100 text-xs text-neutral-600">
         <Info className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
         <p className="leading-relaxed text-[11px]">
-          Os valores e metragens das tipologias refletem a tabela oficial das incorporadoras atualizada via <strong>Órulo API</strong>. A disponibilidade de andares e posições de sol está sujeita a alteração sem aviso prévio. Consulte as condições de parcelamento da entrada com nossos especialistas.
+          Os valores e metragens das tipologias refletem a tabela oficial disponibilizada pelas construtoras e incorporadoras. A disponibilidade de andares e posições de sol está sujeita a alteração sem aviso prévio. Consulte as condições de parcelamento da entrada com nossos especialistas.
         </p>
       </div>
 

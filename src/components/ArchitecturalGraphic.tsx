@@ -43,7 +43,7 @@ export const ArchitecturalGraphic: React.FC<GraphicProps> = ({
             {category === 'implantacao' && 'Implantação'}
           </span>
           <span className="text-[10px] font-mono text-emerald-300 font-semibold px-2 py-0.5 bg-black/50 backdrop-blur-xs rounded tabular-nums">
-            Órulo Sync
+            Foto Oficial
           </span>
         </div>
 

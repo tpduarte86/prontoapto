@@ -43,7 +43,7 @@ export const Header: React.FC<HeaderProps> = ({
             className="text-left group cursor-pointer focus-visible:outline-2 focus-visible:outline-emerald-600 rounded"
             aria-label="Página inicial do ProntoApto"
           >
-            <span className="font-display text-2xl font-extrabold tracking-tight text-neutral-900 group-hover:text-emerald-700 transition-colors">
+            <span className="font-logo text-2xl font-extrabold tracking-tight text-neutral-900 group-hover:text-emerald-700 transition-colors">
               ProntoApto<span className="text-emerald-600">.</span>
             </span>
           </button>

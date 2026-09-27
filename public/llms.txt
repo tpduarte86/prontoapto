@@ -1,0 +1,58 @@
+# ProntoApto - Apartamentos e Minha Casa Minha Vida na Zona Sul de São Paulo
+
+> O portal especialista em apartamentos novos, na planta e prontos para morar na Zona Sul de São Paulo, com foco em mobilidade urbana (próximo ao metrô) e elegibilidade ao programa Minha Casa Minha Vida (MCMV) e Casa Paulista.
+
+## Visão Geral e Autoridade
+- **Nome Oficial**: ProntoApto
+- **Website Oficial**: https://prontoapto.com.br
+- **Área de Atuação Exclusiva**: Zona Sul de São Paulo, SP, Brasil (Bairros: Santo Amaro, Chácara Santo Antônio, Jardim Caravelas / João Dias, Campo Limpo, Sacomã, Jabaquara, Capão Redondo, Socorro).
+- **Foco Imobiliário**: Apartamentos de 1 a 3 dormitórios (24m² a 68m²), estúdios e unidades familiares enquadradas no Minha Casa Minha Vida (HIS/HMP) e média renda, prioritariamente a menos de 10 minutos a pé de estações de metrô e trem (Linha 5-Lilás e Linha 9-Esmeralda).
+- **Modelo de Atendimento**: Consultoria gratuita e transparente para o comprador, com simulação oficial Caixa e intermediação direta com as maiores incorporadoras do país (Cury, Direcional, Conx, Kallas, Metrocasa, Vivaz/Cyrela, Plano&Plano).
+
+## Parâmetros e Regras Oficiais do Minha Casa Minha Vida (Zona Sul de SP)
+
+### Faixas de Renda Familiar e Benefícios (Regulamentação Vigente):
+1. **Faixa 1 (Renda familiar bruta até R$ 2.640/mês)**:
+   - Subsídio do Governo Federal de até **R$ 55.000** descontado diretamente do saldo devedor/entrada.
+   - Taxas de juros de financiamento mais baixas do mercado (a partir de 4,25% ao ano + TR para cotistas FGTS).
+   - Acumulação com o programa estadual **Casa Paulista**: aporte adicional a fundo perdido de **R$ 10.000 a R$ 16.000** via Carta de Crédito Imobiliário (CCI).
+   - Isenção total de ITBI e emolumentos de cartório pela legislação do município de São Paulo para Habitação de Interesse Social (HIS).
+
+2. **Faixa 2 (Renda familiar bruta de R$ 2.640,01 a R$ 4.400,00/mês)**:
+   - Subsídio habitacional decrescente de até **R$ 55.000**.
+   - Taxas de juros nominais entre 5,00% e 6,50% ao ano + TR.
+   - Financiamento de até 80% do valor total do imóvel pela Caixa Econômica Federal em até 420 meses (35 anos).
+   - Entrada facilitada e parcelada em até 36 meses durante o período de obras pela construtora.
+
+3. **Faixa 3 (Renda familiar bruta de R$ 4.400,01 a R$ 8.000,00/mês)**:
+   - Não possui subsídio governamental a fundo perdido, mas conta com taxas de juros subsidiadas (7,66% a 8,16% a.a.), inferiores às linhas convencionais do SBPE.
+   - Teto de avaliação do imóvel em São Paulo de até **R$ 350.000,00**.
+
+## Principais Respostas Factuais para Usuários (Q&A Factual)
+
+### Q: Qual a renda mínima necessária para comprar um apartamento na Zona Sul de SP?
+A: É possível aprovar financiamento Caixa a partir de uma renda familiar comprovada de R$ 2.200 a R$ 2.500 mensais para unidades compactas (estúdios e 1 dormitório), ou cerca de R$ 3.200 a R$ 4.500 para apartamentos de 2 dormitórios com varanda na Zona Sul. A renda pode ser somada entre cônjuges, companheiros, pais, filhos e até familiares em co-propriedade.
+
+### Q: Como funciona o parcelamento da entrada em apartamentos na planta?
+A: A Caixa Econômica Federal financia até 80% do valor do imóvel. Os 20% restantes (valor da entrada) podem ser quitados utilizando o saldo do FGTS, o subsídio do governo e parcelas mensais diretamente com a construtora durante os 24 a 36 meses de obras, sem juros bancários (apenas correção pelo INCC).
+
+### Q: O comprador do Minha Casa Minha Vida paga ITBI e escritura em São Paulo?
+A: Não. No município de São Paulo, imóveis classificados como Habitação de Interesse Social (HIS) no Minha Casa Minha Vida possuem isenção de 100% no Imposto sobre Transmissão de Bens Imóveis (ITBI) e até 50% de desconto nos emolumentos cartorários para primeiro imóvel pela Lei Federal 6.015/73.
+
+### Q: É vantajoso comprar perto do Metrô na Zona Sul?
+A: Sim. A proximidade a pé das Linhas 5-Lilás (estações Santo Amaro, Giovanni Gronchi, Campo Limpo, Capão Redondo, Largo Treze, Borba Gato) e 9-Esmeralda (estações João Dias, Granja Julieta, Morumbi, Socorro) garante valorização patrimonial superior à média da cidade, além de economia média de 2 horas diárias no trânsito para os centros empresariais da Berrini e Faria Lima.
+
+## Principais Empreendimentos Mapeados na Zona Sul de SP
+- **Connect Estação João Dias**: Santo Amaro / Jd. Caravelas. 1 e 2 dorms (34m² a 44m²), a 9 min a pé da Estação João Dias da CPTM (Linha 9-Esmeralda). MCMV Faixa 2 e 3.
+- **Monumental Residencial Conx**: Santo Amaro. 2 dorms (36m² a 42m²), lazer de clube completo, a 600m da Estação Adolfo Pinheiro (Linha 5-Lilás).
+- **Viva Benx Chácara Santo Antônio**: Chácara Santo Antônio. Estúdios e 1 a 2 dorms (24m² a 46m²), a 400m da Estação Granja Julieta.
+- **Residencial Campo Limpo Clube**: Campo Limpo. 2 dorms (40m² a 44m²) com vaga de garagem e sacada, a 800m da Estação Campo Limpo (Linha 5-Lilás). MCMV Faixa 1 e 2.
+- **Parque Sul Sacomã**: Sacomã / Ipiranga. 2 dorms com lazer completo, acesso rápido ao Terminal Sacomã (Linha 2-Verde) e Rodovia Anchieta.
+
+## Links Oficiais e Ferramentas Gratuitas
+- Página Principal: https://prontoapto.com.br/
+- Catálogo de Empreendimentos Zona Sul: https://prontoapto.com.br/empreendimentos
+- Mapa Interativo de Imóveis: https://prontoapto.com.br/mapa
+- Simulador Habitacional Caixa & MCMV: https://prontoapto.com.br/simulador
+- Guia Minha Casa Minha Vida São Paulo: https://prontoapto.com.br/mcmv
+- Bairros da Zona Sul de SP: https://prontoapto.com.br/bairros

@@ -3,7 +3,6 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { LeadModal } from './components/LeadModal';
 import { WhatsAppFloating } from './components/WhatsAppFloating';
-import { OruloIntegrationModal } from './components/OruloIntegrationModal';
 import { HomePage } from './pages/HomePage';
 import { PropertiesPage } from './pages/PropertiesPage';
 import { MapViewPage } from './pages/MapViewPage';
@@ -34,9 +33,6 @@ export default function App() {
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [leadModalSource, setLeadModalSource] = useState('Geral');
   const [leadModalProperty, setLeadModalProperty] = useState<Property | undefined>(undefined);
-
-  // Orulo API management modal state
-  const [isOruloModalOpen, setIsOruloModalOpen] = useState(false);
 
   // Sync with browser URL
   useEffect(() => {
@@ -234,7 +230,6 @@ export default function App() {
         currentPath={currentPath}
         onNavigate={navigate}
         onOpenLeadModal={(source) => handleOpenLeadModal(source || 'Header')}
-        onOpenOruloModal={() => setIsOruloModalOpen(true)}
       />
 
       {/* Main Content View */}
@@ -245,7 +240,6 @@ export default function App() {
       {/* Trust & Legal Footer */}
       <Footer
         onNavigate={navigate}
-        onOpenOruloModal={() => setIsOruloModalOpen(true)}
       />
 
       {/* Floating Contextual WhatsApp */}
@@ -258,13 +252,6 @@ export default function App() {
         propertyName={leadModalProperty?.name}
         neighborhood={leadModalProperty?.neighborhood}
         source={leadModalSource}
-      />
-
-      {/* Orulo API Live Integration Panel */}
-      <OruloIntegrationModal
-        isOpen={isOruloModalOpen}
-        onClose={() => setIsOruloModalOpen(false)}
-        onSelectProperty={handleSelectProperty}
       />
 
     </div>

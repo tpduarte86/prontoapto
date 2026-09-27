@@ -76,7 +76,7 @@ export const ImageLightboxModal: React.FC<LightboxProps> = ({
                 {category === 'planta' ? 'Planta Oficial' : `Perspectiva · ${category.toUpperCase()}`}
               </span>
               <span className="text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-800 px-2 py-0.5 rounded font-mono">
-                Órulo Sync
+                Foto Oficial
               </span>
             </div>
             <h3 className="font-display text-lg font-bold text-white">{caption}</h3>

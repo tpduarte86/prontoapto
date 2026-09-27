@@ -3323,7 +3323,7 @@ export const PROPERTIES: Property[] = RAW_PROPERTIES.map((prop) => {
       imageUrl: fp.url,
       description: `Planta oficial do empreendimento ${prop.name}, aprovada e disponibilizada pela incorporadora.`,
       highlights: [
-        "Planta oficial registrada na Órulo",
+        "Planta humanizada oficial da incorporadora",
         "Layout inteligente com iluminação natural",
         "Opção de financiamento Minha Casa Minha Vida"
       ],

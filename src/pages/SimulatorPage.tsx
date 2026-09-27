@@ -15,10 +15,25 @@ export const SimulatorPage: React.FC<SimulatorPageProps> = ({
   onOpenLeadModal,
 }) => {
   useEffect(() => {
+    const simulatorSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'Simulador Minha Casa Minha Vida e Financiamento Caixa Zona Sul SP',
+      applicationCategory: 'FinanceApplication',
+      operatingSystem: 'All',
+      description: 'Calculadora online para estimar subsídio habitacional, parcelas da Caixa e capacidade de financiamento de apartamentos na Zona Sul de SP.',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'BRL',
+      },
+    };
+
     updateDocumentSEO({
       title: 'Simulador de Financiamento Minha Casa Minha Vida na Zona Sul | ProntoApto',
       description: 'Simule sua capacidade de financiamento imobiliário e descubra quais apartamentos na Zona Sul de SP cabem na sua renda familiar e no seu FGTS.',
       canonicalPath: '/simulador',
+      schema: simulatorSchema,
     });
     trackEvent('page_view', { page: 'simulator_page' });
   }, []);
