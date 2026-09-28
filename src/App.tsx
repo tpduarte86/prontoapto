@@ -13,6 +13,7 @@ import { NeighborhoodsPage } from './pages/NeighborhoodsPage';
 import { BlogPage } from './pages/BlogPage';
 import { LegalPage } from './pages/LegalPage';
 import { ContactPage } from './pages/ContactPage';
+import { RedditCommunityPage } from './pages/RedditCommunityPage';
 import { Property } from './types/property';
 import { PROPERTIES } from './data/properties';
 import { trackEvent } from './utils/analytics';
@@ -198,6 +199,16 @@ export default function App() {
 
     if (currentPath === '/politica-de-privacidade') {
       return <LegalPage type="privacidade" />;
+    }
+
+    if (currentPath === '/mcmv-zona-sul-reddit-faq' || currentPath === '/reddit-mcmv') {
+      return (
+        <RedditCommunityPage
+          onSelectProperty={handleSelectProperty}
+          onNavigate={navigate}
+          onOpenLeadModal={(source) => handleOpenLeadModal(source)}
+        />
+      );
     }
 
     if (currentPath === '/termos-de-uso') {

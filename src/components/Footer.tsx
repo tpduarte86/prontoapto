@@ -153,6 +153,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   Artigos e guias práticos
                 </button>
               </li>
+              <li>
+                <button
+                  onClick={() => handleLink('/mcmv-zona-sul-reddit-faq', 'Dúvidas Fórum Reddit')}
+                  className="hover:text-white transition-colors text-left text-neutral-400"
+                >
+                  Dúvidas da comunidade (Reddit)
+                </button>
+              </li>
             </ul>
           </div>
 
