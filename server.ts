@@ -260,6 +260,20 @@ app.post('/api/leads', async (req, res) => {
   }
 });
 
+// Serve static files from public directory (e.g. .well-known, ai-catalog.json, llms.txt, sitemap.xml)
+app.use(express.static(path.join(__dirname, 'public'), { dotfiles: 'allow' }));
+
+// Specific explicit JSON endpoints for AI Agents & Search Engines
+app.get(['/ai-catalog.json', '/.well-known/ai-catalog.json', '/.well-known/ard.json'], (_req, res) => {
+  const filePath = path.join(__dirname, 'public', 'ai-catalog.json');
+  if (fs.existsSync(filePath)) {
+    res.setHeader('Content-Type', 'application/json');
+    res.sendFile(filePath);
+  } else {
+    res.status(404).json({ error: 'AI catalog not found' });
+  }
+});
+
 // Mounting Vite in Dev / Serving Static in Prod
 async function startServer() {
   if (process.env.NODE_ENV !== 'production') {

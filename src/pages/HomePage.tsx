@@ -148,10 +148,12 @@ export const HomePage: React.FC<HomePageProps> = ({
                     
                     {/* Bairro */}
                     <div>
-                      <label className="block text-[11px] font-semibold text-neutral-600 mb-1">
+                      <label htmlFor="hero-filter-bairro" className="block text-[11px] font-semibold text-neutral-600 mb-1">
                         Bairro na Zona Sul
                       </label>
                       <select
+                        id="hero-filter-bairro"
+                        aria-label="Bairro na Zona Sul"
                         value={selectedRegion}
                         onChange={(e) => setSelectedRegion(e.target.value)}
                         className="w-full px-3 py-2.5 bg-neutral-50 border border-neutral-200 rounded-xl text-xs sm:text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all cursor-pointer"
@@ -169,10 +171,12 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                     {/* Dormitórios */}
                     <div>
-                      <label className="block text-[11px] font-semibold text-neutral-600 mb-1">
+                      <label htmlFor="hero-filter-dormitorios" className="block text-[11px] font-semibold text-neutral-600 mb-1">
                         Dormitórios
                       </label>
                       <select
+                        id="hero-filter-dormitorios"
+                        aria-label="Dormitórios"
                         value={selectedBedrooms}
                         onChange={(e) => setSelectedBedrooms(e.target.value)}
                         className="w-full px-3 py-2.5 bg-neutral-50 border border-neutral-200 rounded-xl text-xs sm:text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all cursor-pointer"
@@ -186,10 +190,12 @@ export const HomePage: React.FC<HomePageProps> = ({
 
                     {/* Renda / Perfil MCMV */}
                     <div>
-                      <label className="block text-[11px] font-semibold text-neutral-600 mb-1">
+                      <label htmlFor="hero-filter-renda" className="block text-[11px] font-semibold text-neutral-600 mb-1">
                         Renda / Programa
                       </label>
                       <select
+                        id="hero-filter-renda"
+                        aria-label="Renda e Programa"
                         value={selectedIncome}
                         onChange={(e) => setSelectedIncome(e.target.value)}
                         className="w-full px-3 py-2.5 bg-neutral-50 border border-neutral-200 rounded-xl text-xs sm:text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition-all cursor-pointer"
@@ -255,8 +261,12 @@ export const HomePage: React.FC<HomePageProps> = ({
               >
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-100">
                   <img
-                    src={heroFeatured.images?.[0]?.url || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1000&q=80'}
+                    src={heroFeatured.images?.[0]?.thumb || heroFeatured.images?.[0]?.url || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1000&q=80'}
                     alt={heroFeatured.name}
+                    fetchPriority="high"
+                    decoding="async"
+                    width="600"
+                    height="450"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
@@ -276,9 +286,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                     <p className="text-xs text-neutral-300 font-medium">
                       {heroFeatured.developer} · {heroFeatured.neighborhood}
                     </p>
-                    <h3 className="font-display text-xl font-bold text-white drop-shadow-sm">
+                    <h2 className="font-display text-xl font-bold text-white drop-shadow-sm">
                       {heroFeatured.name}
-                    </h3>
+                    </h2>
                     <div className="flex items-center justify-between pt-1">
                       <div>
                         <span className="text-[10px] text-neutral-300 block uppercase">A partir de</span>

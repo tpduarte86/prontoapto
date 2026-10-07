@@ -123,7 +123,7 @@ export const SimuladorTool: React.FC<SimuladorToolProps> = ({
             {/* Question 1: Renda Familiar */}
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <label className="text-sm font-bold text-neutral-900">
+                <label htmlFor="simulador-input-renda" className="text-sm font-bold text-neutral-900">
                   1. Qual é a sua renda familiar bruta mensal?
                 </label>
                 <span className="text-sm font-mono font-bold text-emerald-700 tabular-nums">
@@ -134,6 +134,8 @@ export const SimuladorTool: React.FC<SimuladorToolProps> = ({
                 Você pode somar a renda com cônjuge, companheiro ou familiares.
               </p>
               <input
+                id="simulador-input-renda"
+                aria-label="Renda familiar bruta mensal"
                 type="range"
                 min={2000}
                 max={15000}
@@ -152,7 +154,7 @@ export const SimuladorTool: React.FC<SimuladorToolProps> = ({
             {/* Question 2: Entrada Disponível */}
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <label className="text-sm font-bold text-neutral-900">
+                <label htmlFor="simulador-input-entrada" className="text-sm font-bold text-neutral-900">
                   2. Quanto possui disponível para entrada?
                 </label>
                 <span className="text-sm font-mono font-bold text-emerald-700 tabular-nums">
@@ -163,6 +165,8 @@ export const SimuladorTool: React.FC<SimuladorToolProps> = ({
                 Pode ser recursos próprios em conta corrente, poupança ou investimentos.
               </p>
               <input
+                id="simulador-input-entrada"
+                aria-label="Valor disponível para entrada"
                 type="range"
                 min={0}
                 max={100000}
@@ -211,12 +215,16 @@ export const SimuladorTool: React.FC<SimuladorToolProps> = ({
               {hasFgts && (
                 <div className="pt-2">
                   <div className="flex justify-between text-xs mb-1">
-                    <span className="text-neutral-600">Saldo estimado do FGTS:</span>
+                    <label htmlFor="simulador-input-fgts" className="text-neutral-600 font-medium">
+                      Saldo estimado do FGTS:
+                    </label>
                     <span className="font-mono font-bold text-emerald-700 tabular-nums">
                       R$ {fgtsAmount.toLocaleString('pt-BR')}
                     </span>
                   </div>
                   <input
+                    id="simulador-input-fgts"
+                    aria-label="Saldo estimado do FGTS"
                     type="range"
                     min={2000}
                     max={60000}
@@ -259,10 +267,12 @@ export const SimuladorTool: React.FC<SimuladorToolProps> = ({
               </div>
 
               <div>
-                <label className="text-sm font-bold text-neutral-900 block mb-1.5">
+                <label htmlFor="simulador-select-bairro" className="text-sm font-bold text-neutral-900 block mb-1.5">
                   5. Bairro de preferência na Zona Sul
                 </label>
                 <select
+                  id="simulador-select-bairro"
+                  aria-label="Bairro de preferência na Zona Sul"
                   value={preferredNeighborhood}
                   onChange={(e) => setPreferredNeighborhood(e.target.value)}
                   className="w-full px-3.5 py-2.5 bg-neutral-50 border border-neutral-200 rounded-lg text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer"

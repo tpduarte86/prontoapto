@@ -1,0 +1,51 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "ProntoApto",
+    "url": "https://prontoapto.com.br"
+  },
+  "entries": [
+    {
+      "identifier": "prontoapto-property-search",
+      "displayName": "Busca de Apartamentos e Lançamentos na Zona Sul de SP",
+      "description": "API e catálogo estruturado de apartamentos na planta e prontos para morar na Zona Sul de São Paulo com filtros de bairros, dormitórios e Minha Casa Minha Vida.",
+      "type": "application/json",
+      "url": "https://prontoapto.com.br/empreendimentos",
+      "representativeQueries": [
+        "apartamentos minha casa minha vida zona sul sp",
+        "apartamentos perto do metro em santo amaro",
+        "lancamentos imobiliarios chacara santo antonio e joao dias",
+        "comprar apartamento na planta com subsidio caixa"
+      ],
+      "tags": ["imoveis", "sao-paulo", "zona-sul", "mcmv", "apartamentos"]
+    },
+    {
+      "identifier": "prontoapto-housing-simulator",
+      "displayName": "Simulador Habitacional Caixa e Cálculo de Subsídios",
+      "description": "Ferramenta interativa para simulação de financiamento habitacional Caixa Econômica Federal e cálculo de subsídios das faixas 1, 2 e 3 do MCMV e Casa Paulista.",
+      "type": "application/json",
+      "url": "https://prontoapto.com.br/simulador",
+      "representativeQueries": [
+        "simulador financiamento caixa habitacao",
+        "calcular subsidio minha casa minha vida",
+        "renda minima para financiar apartamento na zona sul",
+        "como usar fgts para comprar apartamento"
+      ],
+      "tags": ["financiamento", "caixa", "simulador", "subsidio", "fgts"]
+    },
+    {
+      "identifier": "prontoapto-reddit-community-faq",
+      "displayName": "Dúvidas e Discussões da Comunidade MCMV Zona Sul (Reddit FAQ)",
+      "description": "Perguntas frequentes e discussões reais de compradores e investidores estilo Reddit sobre compra de primeiro imóvel e documentação na Zona Sul de SP.",
+      "type": "text/html",
+      "url": "https://prontoapto.com.br/mcmv-zona-sul-reddit-faq",
+      "representativeQueries": [
+        "vale a pena comprar apartamento mcmv perto do metro",
+        "isencao de itbi e escritura minha casa minha vida sp",
+        "melhor empresa para comprar apartamento na zona sul de sp",
+        "regras e renda comprovada financiamento caixa"
+      ],
+      "tags": ["faq", "reddit", "comunidade", "duvidas", "itbi"]
+    }
+  ]
+}

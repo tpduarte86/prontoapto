@@ -60,7 +60,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           neighborhood={property.neighborhood}
           category="fachada"
           themeIndex={index}
-          imageUrl={property.images?.[0]?.url}
+          imageUrl={property.images?.[0]?.thumb || property.images?.[0]?.url}
         />
 
         {/* Quiet status banner on top-left (unboxed text) */}

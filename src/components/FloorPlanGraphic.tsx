@@ -44,7 +44,7 @@ export const FloorPlanGraphic: React.FC<FloorPlanGraphicProps> = ({
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
               <span>Planta Humanizada Oficial</span>
             </div>
-            <h4 className="text-sm font-bold text-slate-900 font-display">{name}</h4>
+            <p className="text-sm font-bold text-slate-900 font-display">{name}</p>
           </div>
           <div className="text-right">
             <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded">
@@ -114,7 +114,7 @@ export const FloorPlanGraphic: React.FC<FloorPlanGraphicProps> = ({
           <span className="text-[10px] font-mono tracking-wider uppercase text-slate-400 block">
             Planta Arquitetônica Esquematizada
           </span>
-          <h4 className="text-sm font-bold text-slate-900 font-display">{name}</h4>
+          <p className="text-sm font-bold text-slate-900 font-display">{name}</p>
         </div>
         <div className="text-right">
           <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">

@@ -94,6 +94,7 @@ export interface Property {
     category: 'fachada' | 'decorado' | 'lazer' | 'planta' | 'implantacao';
     accentColor?: string;
     url?: string;
+    thumb?: string;
   }[];
 
   floorPlans: FloorPlan[];

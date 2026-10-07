@@ -25,6 +25,7 @@ export const ArchitecturalGraphic: React.FC<GraphicProps> = ({
           src={imageUrl}
           alt={`${name} - ${category}`}
           loading="lazy"
+          decoding="async"
           referrerPolicy="no-referrer"
           onError={() => setImgError(true)}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -49,9 +50,9 @@ export const ArchitecturalGraphic: React.FC<GraphicProps> = ({
 
         {/* Bottom overlay text */}
         <div className="absolute bottom-3 left-3 right-3 z-10 space-y-0.5 pointer-events-none">
-          <h4 className="text-white font-display text-base font-bold tracking-tight line-clamp-1 drop-shadow-sm">
+          <p className="text-white font-display text-base font-bold tracking-tight line-clamp-1 drop-shadow-sm">
             {name}
-          </h4>
+          </p>
           <p className="text-neutral-300 text-[11px] flex items-center gap-1.5">
             <span>{neighborhood}</span>
             <span aria-hidden="true">·</span>
@@ -125,9 +126,9 @@ export const ArchitecturalGraphic: React.FC<GraphicProps> = ({
 
       {/* Bottom overlay text */}
       <div className="relative z-10 space-y-1">
-        <h4 className="text-white font-display text-lg font-bold tracking-tight line-clamp-1">
+        <p className="text-white font-display text-lg font-bold tracking-tight line-clamp-1">
           {name}
-        </h4>
+        </p>
         <p className="text-neutral-300 text-xs flex items-center gap-1.5">
           <span>{neighborhood}</span>
           <span aria-hidden="true">·</span>
