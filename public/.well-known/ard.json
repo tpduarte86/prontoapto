@@ -1,12 +1,8 @@
 {
   "specVersion": "1.0",
-  "host": {
-    "displayName": "ProntoApto",
-    "url": "https://prontoapto.com.br"
-  },
   "entries": [
     {
-      "identifier": "prontoapto-property-search",
+      "identifier": "urn:air:prontoapto.com.br:service:property-search",
       "displayName": "Busca de Apartamentos e Lançamentos na Zona Sul de SP",
       "description": "API e catálogo estruturado de apartamentos na planta e prontos para morar na Zona Sul de São Paulo com filtros de bairros, dormitórios e Minha Casa Minha Vida.",
       "type": "application/json",
@@ -20,7 +16,7 @@
       "tags": ["imoveis", "sao-paulo", "zona-sul", "mcmv", "apartamentos"]
     },
     {
-      "identifier": "prontoapto-housing-simulator",
+      "identifier": "urn:air:prontoapto.com.br:tool:housing-simulator",
       "displayName": "Simulador Habitacional Caixa e Cálculo de Subsídios",
       "description": "Ferramenta interativa para simulação de financiamento habitacional Caixa Econômica Federal e cálculo de subsídios das faixas 1, 2 e 3 do MCMV e Casa Paulista.",
       "type": "application/json",
@@ -34,7 +30,7 @@
       "tags": ["financiamento", "caixa", "simulador", "subsidio", "fgts"]
     },
     {
-      "identifier": "prontoapto-reddit-community-faq",
+      "identifier": "urn:air:prontoapto.com.br:faq:community-discussions",
       "displayName": "Dúvidas e Discussões da Comunidade MCMV Zona Sul (Reddit FAQ)",
       "description": "Perguntas frequentes e discussões reais de compradores e investidores estilo Reddit sobre compra de primeiro imóvel e documentação na Zona Sul de SP.",
       "type": "text/html",
